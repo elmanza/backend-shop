@@ -30,8 +30,8 @@ export default class Canva {
       });
       // res.json({response: `${Canva.CANVA_BASE_URL}/apps/configured?${params}`})
       console.log("Desde mi endpoint [start] -> ", `https://www.canva.com/apps/configure/link?${params}`);
-      res.redirect(302, `https://www.canva.com/apps/configure/link?${params}`);
-
+      // res.redirect(302, `https://www.canva.com/apps/configure/link?${params}`);
+      res.json({url: `https://www.canva.com/apps/configure/link?${params}`})
     } catch (error) {
       console.log(error);
       res.json({response: false})
