@@ -36,7 +36,7 @@ export default class Canva {
       // const nonceQuery = req.query.nonce;
       console.log("Mis llaves autenticadas --> req.signedCookies --> ", req.signedCookies);
 
-      console.log("Información de la solicitud:", {
+      console.log("Información de la solicitud: --> ", {
         method: req.method,
         originalUrl: req.originalUrl,
         params: req.params,
