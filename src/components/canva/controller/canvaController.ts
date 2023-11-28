@@ -21,7 +21,7 @@ export default class Canva {
       });
       // res.json({response: `${Canva.CANVA_BASE_URL}/apps/configured?${params}`})
 
-      res.redirect(302, `${Canva.CANVA_BASE_URL}/apps/configure/link?${params}`);
+      res.redirect(302, `https://www.canva.com/apps/configure/link?${params}`);
 
     } catch (error) {
       console.log(error);
@@ -35,6 +35,15 @@ export default class Canva {
     try {
       // const nonceQuery = req.query.nonce;
       console.log("Mis llaves autenticadas --> req.signedCookies --> ", req.signedCookies);
+
+      console.log("Información de la solicitud:", {
+        method: req.method,
+        originalUrl: req.originalUrl,
+        params: req.params,
+        query: req.query,
+        body: req.body,
+        headers: req.headers,
+      });
 
       const failureResponse = () => {
         const params = new URLSearchParams({
