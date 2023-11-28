@@ -5,6 +5,7 @@ import { config } from "./config";
 import serverRoutes from "./routes";
 import Socket from "./utils/sockets/socket.io";
 import path from "path";
+import cookieParser from "cookie-parser";
 
 // Extender el tipo de Request para incluir la propiedad socketManager
 declare module "express" {
@@ -32,6 +33,7 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({extended: true}));
     this.app.use(express.static(path.resolve(__dirname, 'public')));
+    this.app.use(cookieParser("secretCanva"));
   }
 
   views(){
