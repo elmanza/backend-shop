@@ -20,7 +20,7 @@ export default class Canva {
         state: req?.query?.state?.toString() || "",
       });
       // res.json({response: `${Canva.CANVA_BASE_URL}/apps/configured?${params}`})
-
+      console.log("Desde mi endpoint [start] -> ", `https://www.canva.com/apps/configure/link?${params}`);
       res.redirect(302, `https://www.canva.com/apps/configure/link?${params}`);
 
     } catch (error) {
