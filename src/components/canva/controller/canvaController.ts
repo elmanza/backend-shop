@@ -3,15 +3,15 @@ import CanvaService from "../services/canvaService";
 const canvaService = new CanvaService();
 export default class Canva {
   static canvaService = null;
-  private COOKIE_EXPIRY_MS = 5 * 60 * 1000; // 5 minutes
-  private CANVA_BASE_URL = "https://canva.com";
+  static COOKIE_EXPIRY_MS = 5 * 60 * 1000; // 5 minutes
+  static CANVA_BASE_URL = "https://canva.com";
   async start(req: Request, res: Response, next: NextFunction){
     try {
-      let [nonceWithExpiry, nonce] = await canvaService.start(this.COOKIE_EXPIRY_MS);
+      let [nonceWithExpiry, nonce] = await canvaService.start(Canva.COOKIE_EXPIRY_MS);
       res.cookie("nonce", nonceWithExpiry, {
         secure: true,
         httpOnly: true,
-        maxAge: this.COOKIE_EXPIRY_MS,
+        maxAge: Canva.COOKIE_EXPIRY_MS,
         signed: true,
       });
 
@@ -19,14 +19,18 @@ export default class Canva {
         nonce,
         state: req?.query?.state?.toString() || "",
       });
+      // res.json({response: `${Canva.CANVA_BASE_URL}/apps/configured?${params}`})
 
-      res.redirect(302, `${this.CANVA_BASE_URL}/apps/configure/link?${params}`);
+      res.redirect(302, `${Canva.CANVA_BASE_URL}/apps/configure/link?${params}`);
 
     } catch (error) {
-      next(error);
+      console.log(error);
+      res.json({response: false})
     }
   }
+// https://backend-shop-production.up.railway.app/configuration/start?state=w5hH69-MLjPM1VtJAk079zs5wOjrr98eeZYh09p9tP_JfIAWrQyH0y0LwN5Kr6iuBU4-G48KXNWMo9FtKJHJOdyVECXTEDdG1pOK3lhtqLP-zTEq6WzZ7UU2XBH7Pmrb6ZcN5Nc6FQBW1n6UfNdAMg5221pBwn-Z5WWdqKnfpvG7GYNHE5OdWe7r0RaXaOWcwWFB5BbP7_aFZmyQJBrdue5_fTP4gUsXpjMkGq-hmQ8Ur6Y0
 
+// http://localhost:3001/canva/configuration/start?state=w5hH69-MLjPM1VtJAk079zs5wOjrr98eeZYh09p9tP_JfIAWrQyH0y0LwN5Kr6iuBU4-G48KXNWMo9FtKJHJOdyVECXTEDdG1pOK3lhtqLP-zTEq6WzZ7UU2XBH7Pmrb6ZcN5Nc6FQBW1n6UfNdAMg5221pBwn-Z5WWdqKnfpvG7GYNHE5OdWe7r0RaXaOWcwWFB5BbP7_aFZmyQJBrdue5_fTP4gUsXpjMkGq-hmQ8Ur6Y0
   async redirect(req: Request, res: Response, next: NextFunction){
     try {
       // const nonceQuery = req.query.nonce;
@@ -37,7 +41,7 @@ export default class Canva {
           success: "false",
           state: req.query.state?.toString() || "",
         });
-        res.redirect(302, `${this.CANVA_BASE_URL}/apps/configured?${params}`);
+        res.redirect(302, `${Canva.CANVA_BASE_URL}/apps/configured?${params}`);
       };
 
       // Get the nonce and expiry time stored in the cookie.
@@ -98,7 +102,8 @@ export default class Canva {
       });
 
       // Redirect the user back to Canva
-      res.redirect(302, `${this.CANVA_BASE_URL}/apps/configured?${params}`);
+      res.json({response: `${Canva.CANVA_BASE_URL}/apps/configured?${params}`})
+      // res.redirect(302, `${Canva.CANVA_BASE_URL}/apps/configured?${params}`);
 
     } catch (error) {
       next(error);
