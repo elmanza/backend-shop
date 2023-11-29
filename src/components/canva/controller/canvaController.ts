@@ -62,6 +62,12 @@ export default class Canva {
         return failureResponse();
       }
 
+      console.log("---------------------------");
+      console.log({
+        cookieNonceAndExpiry,
+        queryNonce,
+        cookieNonce
+      })
 
       // If the nonces are empty, exit the authentication flow.
       if (
