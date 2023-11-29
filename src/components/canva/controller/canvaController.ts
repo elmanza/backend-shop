@@ -89,6 +89,7 @@ export default class Canva {
       const params = new URLSearchParams({
         success: "true",
         state: req?.query?.state?.toString() || "",
+        tomi_access_token: req?.query?.tomi_access_token?.toString() || ""
       });
 
       // Redirect the user back to Canva
@@ -116,7 +117,7 @@ export default class Canva {
       let response = await canvaService.login(username, password);
       if (response) {
         console.log("Auth Successfully -> [INFO]: ", {response});
-        res.redirect(302, `/canva/redirect-url?${req.originalUrl.split("?")[1]}`);
+        res.redirect(302, `/canva/redirect-url?tomi_access_token${response.access_token}&${req.originalUrl.split("?")[1]}`);
       } else {
         res.render('login', { error: true, route: `/canva/login?${req.originalUrl.split("?")[1]}` });
       }
