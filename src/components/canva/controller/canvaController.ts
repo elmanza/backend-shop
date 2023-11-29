@@ -115,7 +115,8 @@ export default class Canva {
       const { username, password } = req.body;
       let response = await canvaService.login(username, password);
       if (response) {
-        res.json({response});
+        console.log("Auth Successfully -> [INFO]: ", {response});
+        res.redirect(302, `/canva/redirect-url?${req.originalUrl.split("?")[1]}`);
       } else {
         res.render('login', { error: true, route: `/canva/login?${req.originalUrl.split("?")[1]}` });
       }
