@@ -3,7 +3,7 @@ import CanvaService from "../services/canvaService";
 const canvaService = new CanvaService();
 export default class Canva {
   static canvaService = null;
-  static COOKIE_EXPIRY_MS = 60 * 60 * 1000; // 5 minutes
+  static COOKIE_EXPIRY_MS = 5 * 60 * 1000; // 5 minutes
   static CANVA_BASE_URL = "https://canva.com";
 
   async start(req: Request, res: Response, next: NextFunction){
@@ -62,13 +62,6 @@ export default class Canva {
         return failureResponse();
       }
 
-      console.log("---------------------------");
-      console.log({
-        cookieNonceAndExpiry,
-        queryNonce,
-        cookieNonce
-      })
-
       // If the nonces are empty, exit the authentication flow.
 
       if (
@@ -102,6 +95,30 @@ export default class Canva {
       res.redirect(302, `${Canva.CANVA_BASE_URL}/apps/configured?${params}`);
       // res.json({response: `${Canva.CANVA_BASE_URL}/apps/configured?${params}`})
 
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async loginRender(req: Request, res: Response, next: NextFunction){
+    try {
+      console.log('Headers:', req.headers);
+      console.log('Ruta completa:', req.originalUrl);
+      res.render('login', { error: false });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async login(req: Request, res: Response, next: NextFunction){
+    try {
+      const { username, password } = req.body;
+      let response = await canvaService.login(username, password);
+      if (response) {
+        res.json({response});
+      } else {
+        res.render('login', { error: true });
+      }
     } catch (error) {
       next(error);
     }
