@@ -70,24 +70,15 @@ export default class Canva {
       })
 
       // If the nonces are empty, exit the authentication flow.
-      if (
-        this.isEmpty(cookieNonceAndExpiry) ||
-        this.isEmpty(queryNonce) ||
-        this.isEmpty(cookieNonce)
-      ) {
-        return failureResponse();
-      }
 
-      /**
-       * Check that:
-       *
-       * - The nonce in the cookie and query parameter contain the same value
-       * - The nonce has not expired
-       *
-       * **Note:** We could rely on the cookie expiry, but that is vulnerable to tampering
-       * with the browser's time. This allows us to double-check based on server time.
-       */
-      if (expiry < Date.now() || cookieNonce !== queryNonce) {
+      if (
+        Date.now() > expiry || // The nonce has expired
+        typeof cookieNonce !== "string" || // The nonce in the cookie is not a string
+        typeof queryNonce !== "string" || // The nonce in the query parameter is not a string
+        cookieNonce.length < 1 || // The nonce in the cookie is an empty string
+        queryNonce.length < 1 || // The nonce in the query parameter is an empty string
+        cookieNonce !== queryNonce // The nonce in the cookie does not match the nonce in the query parameter
+      ) {
         return failureResponse();
       }
 
