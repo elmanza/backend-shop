@@ -104,7 +104,7 @@ export default class Canva {
     try {
       console.log('Headers:', req.headers);
       console.log('Ruta completa:', req.originalUrl);
-      res.render('login', { error: false });
+      res.render('login', { error: false, route: `/canva/login?${req.originalUrl.split("?")[1]}` });
     } catch (error) {
       next(error);
     }
@@ -117,7 +117,7 @@ export default class Canva {
       if (response) {
         res.json({response});
       } else {
-        res.render('login', { error: true });
+        res.render('login', { error: true, route: `/canva/login?${req.originalUrl.split("?")[1]}` });
       }
     } catch (error) {
       next(error);
