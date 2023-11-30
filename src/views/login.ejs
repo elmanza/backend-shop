@@ -9,23 +9,32 @@
 <body>
   <div>
     <header>
-      <img src="https://cdn.tomi.digital/apps/fnt-platform/2.0.11242023.1/assets/images/TOMiDigital-logo.svg" alt="">
+      <div>
+        <img src="https://cdn.tomi.digital/apps/fnt-platform/2.0.11242023.1/assets/images/TOMiDigital-logo.svg" alt="">
+      </div>
     </header>
-    <h2>Inicio de sesión</h2>
-   <div class="container_body">
-    <% if (error) { %>
-      <p style="color: red;">Credenciales incorrectas. Inténtalo de nuevo.</p>
-    <% } %>
-    <form action="<%= route %>" method="post">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required>
-      <br>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
-      <br>
-      <button class="button_login" type="submit">Iniciar Sesión</button>
-    </form>
-   </div>
+    <div style="position: relative;">
+      <div class="bg_login">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="450"><defs/><defs><clipPath id="a"><path d="M0 0h1000v450H0z"/></clipPath></defs><g clip-path="url(#a)"><path fill="rgba(255,255,255,0)" d="M0 0h1000v450H0z"/><path fill="#fff" d="M167 58a33 33 0 0133-33h578a33 33 0 0134 33v279a33 33 0 01-34 33H200a33 33 0 01-33-33z"/><path fill="none" stroke="#e1e4f0" stroke-linecap="round" stroke-linejoin="round" stroke-width="11.1" d="M162 58a39 39 0 0138-39h578a39 39 0 0139 39v279a39 39 0 01-39 38H200a39 39 0 01-38-38z"/><path fill="none" stroke="#e1e4f0" stroke-linecap="round" stroke-linejoin="round" stroke-width="11.1" d="M908 251h53c13 0 24 12 24 26h0c0 14-9 25-21 27l-172 27c-16 2-27 16-27 33h0c0 19 14 34 31 34h19m124 27h35m-959 0h36"/><path fill="#f5f6fc" stroke="#e1e4f0" stroke-linecap="round" stroke-linejoin="round" stroke-width="11.1" d="M842 359h0a57 57 0 0157 57v9H785v-9a57 57 0 0157-57z"/><path fill="#f5f6fc" stroke="#e1e4f0" stroke-linecap="round" stroke-linejoin="round" stroke-width="10.7" d="M847 377a9 9 0 01-4-12l59-107a9 9 0 0112-4h0a9 9 0 014 13l-59 107a9 9 0 01-12 3z"/><path fill="#f5f6fc" stroke="#e1e4f0" stroke-linecap="round" stroke-linejoin="round" stroke-width="11.1" d="M751 79a9 9 0 0112-1l146 137a9 9 0 010 13h0a9 9 0 01-13 0L751 91a9 9 0 010-12z"/><path fill="#f5f6fc" stroke="#e1e4f0" stroke-linecap="round" stroke-linejoin="round" stroke-width="11.1" d="M911 287a36 36 0 1136-36 36 36 0 01-36 36z"/><path fill="#fff" stroke="#e1e4f0" stroke-linecap="round" stroke-linejoin="round" stroke-width="11.1" d="M167 126h543"/><path fill="#f5f6fc" stroke="#e1e4f0" stroke-linecap="round" stroke-linejoin="round" stroke-width="11.1" d="M745 54a20 20 0 0128 0h0a20 20 0 010 28l-24 24a20 20 0 01-28 0h0a20 20 0 010-28z"/><path fill="#fff" stroke="#e1e4f0" stroke-linecap="round" stroke-linejoin="round" stroke-width="11.1" d="M679 184a36 36 0 1136-36 36 36 0 01-36 36z"/><path fill="#f5f6fc" stroke="#e1e4f0" stroke-linecap="round" stroke-linejoin="round" stroke-width="11.1" d="M739 88h0a72 72 0 010 102l-8 8h0L629 96h0l8-8a72 72 0 01102 0z"/><path fill="none" stroke="#e1e4f0" stroke-linecap="round" stroke-linejoin="round" stroke-width="11.1" d="M67 425h854"/><path fill="#e1e4f0" d="M223 112a36 36 0 1136-36 36 36 0 01-36 36z"/><path fill="#fff" d="M90 215a29 29 0 0129-28h83a29 29 0 0128 28v176a29 29 0 01-28 29h-83a29 29 0 01-29-29z"/><path fill="none" stroke="#e1e4f0" stroke-linecap="round" stroke-linejoin="round" stroke-width="11.1" d="M85 215a34 34 0 0134-34h83a34 34 0 0134 34v176a34 34 0 01-34 34h-83a34 34 0 01-34-34z"/><path fill="#e1e4f0" d="M99 215a21 21 0 0121-21h81a21 21 0 0121 21v176a21 21 0 01-21 21h-81a21 21 0 01-21-21z"/><path fill="#fff" d="M133 291a8 8 0 017-7 8 8 0 018 7 8 8 0 01-8 8 8 8 0 01-7-8zM174 291a8 8 0 017-7 8 8 0 018 7 8 8 0 01-8 8 8 8 0 01-7-8zM161 328a24 24 0 01-12-3 24 24 0 01-5-4 24 24 0 01-4-5 4 4 0 011-5 4 4 0 012-1 4 4 0 011 0 4 4 0 012 0 5 5 0 011 1 4 4 0 011 1 16 16 0 002 3 16 16 0 004 2 16 16 0 003 2 16 16 0 004 0 16 16 0 004 0 16 16 0 004-2 16 16 0 005-5 5 5 0 011-1 4 4 0 011 0 4 4 0 012-1 4 4 0 013 2 4 4 0 010 5 24 24 0 01-8 8 24 24 0 01-6 2 24 24 0 01-6 1z"/></g></svg>
+      </div>
+      <div style="position: relative; z-index: 2;">
+        <h2>Inicio de sesión</h2>
+        <div class="container_body shadow">
+          <% if (error) { %>
+            <p style="color: red;">Credenciales incorrectas. Inténtalo de nuevo.</p>
+          <% } %>
+          <form action="<%= route %>" method="post">
+            <input placeholder="Correo electrónico o usuario" type="text" id="username" name="username" required>
+            <br>
+            <input placeholder="Contraseña" type="password" id="password" name="password" required>
+            <br>
+            <div style="width: 100%; display: flex; justify-content: center;">
+              <button class="button_login btn-contained-deep-purple" type="submit">Iniciar Sesión</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>
