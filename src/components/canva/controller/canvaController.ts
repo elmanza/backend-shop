@@ -124,6 +124,25 @@ export default class Canva {
     }
   }
 
+  async getAuthenticationStatus(req: Request, res: Response, next: NextFunction){
+    try {
+      const data = await db.read();
+      console.log("req.canva.userId -> ", req.canva.userId);
+
+      // Check if the user is authenticated
+      const isAuthenticated = data.users.filter( (_user: any) => _user.user === req.canva.userId);
+
+      console.log("Estamos enviando ... ", "[isAuthenticated] -> ", isAuthenticated);
+      // Return the authentication status
+      res.send({
+        isAuthenticated,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  
   async loginRender(req: Request, res: Response, next: NextFunction){
     try {
       res.render('login', { error: false, route: `/canva/login?${req.originalUrl.split("?")[1]}` });
