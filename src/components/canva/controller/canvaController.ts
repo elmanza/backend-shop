@@ -1,10 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 import CanvaService from "../services/canvaService";
+import HandlerDocument from "../../../utils/handlerDocument";
 const canvaService = new CanvaService();
+const db = new HandlerDocument({ users: [] });
 export default class Canva {
   static canvaService = null;
   static COOKIE_EXPIRY_MS = 5 * 60 * 1000; // 5 minutes
   static CANVA_BASE_URL = "https://canva.com";
+  
 
   async start(req: Request, res: Response, next: NextFunction){
     try {
@@ -32,14 +35,13 @@ export default class Canva {
 
   async redirect(req: Request, res: Response, next: NextFunction){
     try {
-
+      console.log(" [ REDIRECT ] -> ", req.originalUrl);
       const failureResponse = () => {
         const params = new URLSearchParams({
           success: "false",
           state: req.query.state?.toString() || "",
         });
-        // res.redirect(302, `${Canva.CANVA_BASE_URL}/apps/configured?${params}`);
-        res.json({response: `${Canva.CANVA_BASE_URL}/apps/configured?${params}`})
+        res.redirect(302, `${Canva.CANVA_BASE_URL}/apps/configured?${params}`);
       };
 
       // Get the nonce and expiry time stored in the cookie.
@@ -85,17 +87,38 @@ export default class Canva {
         return;
       }
 
+      // Load the database
+      const data = await db.read();
+
+      // Add the user to the database
+      if (!data.users.filter( (_user: any) => _user.user === user).length) {
+        data.users.push({
+          tomi_access_token: req?.query?.tomi_access_token?.toString() || "",
+          user
+        });
+        await db.write(data);
+      }
+
+
       // Create query parameters for redirecting back to Canva
       const params = new URLSearchParams({
         success: "true",
-        state: req?.query?.state?.toString() || "",
-        tomi_access_token: req?.query?.tomi_access_token?.toString() || ""
+        state: req?.query?.state?.toString() || ""
       });
 
       // Redirect the user back to Canva
       res.redirect(302, `${Canva.CANVA_BASE_URL}/apps/configured?${params}`);
-      // res.json({response: `${Canva.CANVA_BASE_URL}/apps/configured?${params}`})
 
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getAllUsers(req: Request, res: Response, next: NextFunction){
+    try {
+      // Load the database
+      const data = await db.read();
+      res.json(data);
     } catch (error) {
       next(error);
     }
@@ -103,8 +126,6 @@ export default class Canva {
 
   async loginRender(req: Request, res: Response, next: NextFunction){
     try {
-      console.log('Headers:', req.headers);
-      console.log('Ruta completa:', req.originalUrl);
       res.render('login', { error: false, route: `/canva/login?${req.originalUrl.split("?")[1]}` });
     } catch (error) {
       next(error);

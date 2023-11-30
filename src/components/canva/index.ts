@@ -16,4 +16,6 @@ export default (app: Express) => {
   rt.post('/login', canva.login);
   rt.get('/redirect-url', createJwtMiddleware(APP_ID, getTokenFromQueryString), canva.redirect);
 
+  rt.get('/getusers', canva.getAllUsers);
+
 }

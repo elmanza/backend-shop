@@ -4,10 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tomi Login for Canva</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <div>
-    <h2>Login</h2>
+    <header>
+      <img src="https://cdn.tomi.digital/apps/fnt-platform/2.0.11242023.1/assets/images/TOMiDigital-logo.svg" alt="">
+    </header>
+    <h2>Inicio de sesión</h2>
+   <div class="container_body">
     <% if (error) { %>
       <p style="color: red;">Credenciales incorrectas. Inténtalo de nuevo.</p>
     <% } %>
@@ -18,8 +23,9 @@
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required>
       <br>
-      <button type="submit">Login</button>
+      <button class="button_login" type="submit">Iniciar Sesión</button>
     </form>
+   </div>
   </div>
 </body>
 </html>
