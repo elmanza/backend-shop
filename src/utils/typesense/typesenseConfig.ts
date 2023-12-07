@@ -1,9 +1,5 @@
-// typesenseConfig.ts
-
 import { Client } from 'typesense';
-
-// typesenseConfig.ts
-
+import { typesense } from "../../config" ;
 export interface TypesenseConfig {
   nodes: {
     host: string;
@@ -16,12 +12,12 @@ export interface TypesenseConfig {
 const typesenseConfig: TypesenseConfig = {
   nodes: [
     {
-      host: 'uvb6mphijcn1s20zp-1.a1.typesense.net', // localhost
-      port: 443,      // 8108
-      protocol: 'https',  // HTTP
+      host: typesense.host,
+      port: typesense.port,
+      protocol: 'https',
     },
   ],
-  apiKey: 'TWvyWCeXHRcyTceMyooF5PHkuXXf9i49', // Reemplaza esto con tu clave de API de Typesense
+  apiKey: typesense.api_key,
 };
 
 const typesenseClient = new Client(typesenseConfig);
