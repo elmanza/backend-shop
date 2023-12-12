@@ -1,7 +1,7 @@
 import typesenseClient from "../../../utils/typesense/typesenseConfig"
 export default class TypesenseService { 
 
-  async search(keyword: string){
+  async search(keyword: string, page: number = 1){
     try {
       
       let q = ""
@@ -10,7 +10,7 @@ export default class TypesenseService {
         // q = keyword.split(" ").join(" AND ");
       }
       const searchResult = await typesenseClient.collections('lessons').documents().search({
-        page: 1,
+        page,
         q,
         per_page: 20,
         query_by: 'title',
