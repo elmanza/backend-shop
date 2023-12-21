@@ -80,7 +80,8 @@
         <text id="play.tomi.digital" transform="translate(20 -1995)" fill="#5f5afa" font-size="15" font-family="Lato-Bold, Lato" font-weight="700" text-decoration="underline"><tspan x="-52.807" y="0">play.tomi.digital</tspan></text>
         <text id="Or_log_in_to:" data-name="Or log in to:" transform="translate(20 -2019)" fill="#22233a" font-size="12" font-family="Lato-Regular, Lato"><tspan x="-31.158" y="0">Or log in to:</tspan></text>
       </g>
-      <text id="Ask_your_students_to_scan_the_code:" data-name="Ask your students to scan the code:" transform="translate(1247 4214)" fill="#22233a" font-size="12" font-family="Lato-Regular, Lato"><tspan x="-54.195" y="12">Ask your students to </tspan><tspan x="-37.773" y="27">scan the code:</tspan></text>
+      <text id="Ask_your_students_to_scan_the_code:" data-name="Ask your students to 
+scan the code:" transform="translate(1311 4226)" fill="#22233a" font-size="12" font-family="Lato-Regular, Lato"><tspan x="-55.731" y="0">Ask your students to </tspan><tspan x="-37.773" y="15">scan the code:</tspan></text>
       <g id="Group_16066" data-name="Group 16066" transform="translate(1911 5561)">
         <g id="Group_15606" data-name="Group 15606" transform="translate(-4 -10)">
           <g id="Group_16068" data-name="Group 16068" transform="translate(-257.5 571)">
