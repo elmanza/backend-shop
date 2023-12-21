@@ -21,8 +21,8 @@ steps:
     npm run start:ts
   displayName: 'npm install and build and start'
   
-- script: ls -R $(System.DefaultWorkingDirectory)/path/to/artifacts
-  displayName: 'List Contents of Artifacts Directory'
+- script: ls -R $(System.DefaultWorkingDirectory)
+  displayName: 'List Contents of Default Working Directory'
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: '$(System.DefaultWorkingDirectory)/path/to/artifacts'
