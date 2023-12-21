@@ -31,10 +31,6 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 - script: ls -R $(Build.ArtifactStagingDirectory)
   displayName: 'List Contents of Default Working Directory'
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: '$(System.DefaultWorkingDirectory)/path/to/artifacts'
-    artifactName: 'drop'
 
 - task: AzureRmWebAppDeployment@4
   inputs:
@@ -42,6 +38,6 @@ steps:
     azureSubscription: 'manza-azure-portal'
     appType: 'webAppLinux'
     WebAppName: 'manzanocanva'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/path/to/artifacts/**/*.zip'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)'
     RuntimeStack: 'NODE|18-lts'
     StartupCommand: 'npm run start:ts'
