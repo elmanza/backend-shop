@@ -6,8 +6,7 @@ import serverRoutes from "./routes";
 import Socket from "./utils/sockets/socket.io";
 import path from "path";
 import cookieParser from "cookie-parser";
-
-// Extender el tipo de Request para incluir la propiedad socketManager
+5
 declare module "express" {
   interface Request {
     socketManager?: Socket;
