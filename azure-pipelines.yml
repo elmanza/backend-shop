@@ -26,6 +26,6 @@ steps:
     azureSubscription: 'manza-azure-portal'
     appType: 'webAppLinux'
     WebAppName: 'manzanocanva'
-    packageForLinux: 'D:\a\r1\a\'
+    packageForLinux: 
     RuntimeStack: 'NODE|18-lts'
     StartupCommand: 'npm run start:ts'
