@@ -58,17 +58,20 @@ class App {
   }
 
   listen(){
-    const address = this.httpServer?.address();
-    if (address && typeof address !== 'string') {
-      const url =
-        typeof address === 'string'
-          ? address
-          : `http://${address.address}:${address.port}`;
-
-      console.log(`Server listening at ${url}`);
-    } else {
-      console.error('Failed to determine server address.');
-    }
+    this.app.listen(config.port, ()=>{
+      const address = this.httpServer?.address();
+      if (address && typeof address !== 'string') {
+        const url =
+          typeof address === 'string'
+            ? address
+            : `http://${address.address}:${address.port}`;
+  
+        console.log(`Server listening at ${url}`, config.port);
+      } else {
+        console.error('Failed to determine server address.',config.port);
+      }
+    });
+    
   }
 }
 
