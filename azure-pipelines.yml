@@ -18,8 +18,7 @@ steps:
 - script: |
     npm install
     npm run build
-    npm run start:ts
-  displayName: 'npm install and build and start'
+  displayName: 'npm install and build'
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
