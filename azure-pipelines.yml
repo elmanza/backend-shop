@@ -20,24 +20,12 @@ steps:
     npm run build
     npm run start:ts
   displayName: 'npm install and build and start'
-
-- task: CopyFiles@2
-  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)'
-    Contents: |
-      **/*
-      !.git/**/*
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-- script: ls -R $(Build.ArtifactStagingDirectory)
-  displayName: 'List Contents of Default Working Directory'
-
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'manza-azure-portal'
     appType: 'webAppLinux'
     WebAppName: 'manzanocanva'
-    packageForLinux: '$(Build.ArtifactStagingDirectory)'
+    packageForLinux: 'D:\a\r1\a\'
     RuntimeStack: 'NODE|18-lts'
     StartupCommand: 'npm run start:ts'
