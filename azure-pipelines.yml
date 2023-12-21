@@ -20,3 +20,12 @@ steps:
     npm run build
     npm run start:ts
   displayName: 'npm install and build and start'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'manza-azure-portal'
+    appType: 'webAppLinux'
+    WebAppName: 'manzanocanva'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'NODE|18-lts'
+    StartupCommand: 'npm run start:ts'
