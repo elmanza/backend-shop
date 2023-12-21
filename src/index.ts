@@ -58,7 +58,17 @@ class App {
   }
 
   listen(){
-    this.httpServer!.listen(config.port, ()=>{console.log(`http://localhost:${config.port}`)});
+    const address = this.httpServer?.address();
+    if (address && typeof address !== 'string') {
+      const url =
+        typeof address === 'string'
+          ? address
+          : `http://${address.address}:${address.port}`;
+
+      console.log(`Server listening at ${url}`);
+    } else {
+      console.error('Failed to determine server address.');
+    }
   }
 }
 
