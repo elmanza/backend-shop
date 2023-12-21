@@ -20,12 +20,17 @@ steps:
     npm run build
     npm run start:ts
   displayName: 'npm install and build and start'
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(System.DefaultWorkingDirectory)/path/to/artifacts'
+    artifactName: 'drop'
+
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'manza-azure-portal'
     appType: 'webAppLinux'
     WebAppName: 'manzanocanva'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/path/to/artifacts/**/*.zip'
     RuntimeStack: 'NODE|18-lts'
     StartupCommand: 'npm run start:ts'
